@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ollo | Tech Enthusiast & Content Creator</title>
+    <meta name="description" content="Portfolio site for Ollo, a futuristic tech enthusiast and content creator.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'neon-blue': '#00f3ff',
+                        'neon-purple': '#bd00ff',
+                        'dark-bg': '#0a0a12',
+                        'glass-bg': 'rgba(255, 255, 255, 0.05)',
+                        'glass-border': 'rgba(255, 255, 255, 0.1)',
+                    },
+                    animation: {
+                        'gradient-slow': 'gradient 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-card {
+                @apply bg-glass-bg backdrop-blur-xl border border-glass-border shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-2xl;
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-purple;
+            }
+            .section-padding {
+                @apply py-20 md:py-32;
+            }
+        }
+
+        body {
+            background-color: #0a0a12; /* Fallback */
+            background-image: linear-gradient(-45deg, #0a0a12, #1a1a2e, #240046, #0f3460);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar for Webkit */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #00f3ff, #bd00ff);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans relative">
+
+    <nav class="fixed w-full z-50 top-0 start-0 bg-dark-bg/50 backdrop-blur-md border-b border-glass-border transition-all duration-300">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <i data-lucide="cpu" class="w-8 h-8 text-neon-blue"></i>
+                <span class="self-center text-2xl font-bold whitespace-nowrap text-gradient">OLLO</span>
+            </a>
+            <div class="hidden md:block w-full md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-glass-border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+                    <li><a href="#hero" class="block py-2 px-3 text-white hover:text-neon-blue transition">Home</a></li>
+                    <li><a href="#about" class="block py-2 px-3 text-gray-300 hover:text-neon-blue transition">About</a></li>
+                    <li><a href="#projects" class="block py-2 px-3 text-gray-300 hover:text-neon-blue transition">Projects</a></li>
+                    <li><a href="#experience" class="block py-2 px-3 text-gray-300 hover:text-neon-blue transition">Experience</a></li>
+                    <li><a href="#contact" class="block py-2 px-3 text-gray-300 hover:text-neon-blue transition">Contact</a></li>
+                </ul>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-400 rounded-lg hover:bg-glass-bg focus:outline-none focus:ring-2 focus:ring-neon-blue">
+                    <span class="sr-only">Open main menu</span>
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="min-h-screen flex items-center justify-center section-padding pt-32">
+        <div class="max-w-screen-xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right" data-aos-duration="1000">
+                <h4 class="text-neon-blue font-semibold mb-4 tracking-wider flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i> HELLO WORLD
+                </h4>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    I'm <span class="text-gradient">Ollo</span>.<br>
+                    Crafting the <span class="text-white">Future</span> of Tech Content.
+                </h1>
+                <p class="text-gray-400 text-lg mb-8 max-w-lg">
+                    Content Creator & Tech Enthusiast specializing in simplifying complex technologies and building immersive digital experiences.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-dark-bg bg-neon-blue rounded-full hover:bg-neon-blue/80 transition duration-300 shadow-[0_0_20px_rgba(0,243,255,0.5)]">
+                        View My Work <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                    </a>
+                    <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white border-2 border-neon-purple rounded-full hover:bg-neon-purple/20 transition duration-300">
+                        Let's Connect
+                    </a>
+                </div>
+            </div>
+            <div class="hidden md:flex justify-center relative" data-aos="fade-left" data-aos-duration="1200">
+                <div class="w-80 h-80 relative animate-float">
+                    <div class="absolute inset-0 bg-gradient-to-r from-neon-blue to-neon-purple rounded-full blur-3xl opacity-30 -z-10"></div>
+                    <div class="w-full h-full rounded-full glass-card flex items-center justify-center border-2 border-neon-blue/50 overflow-hidden p-2 relative z-10">
+                        <img src="https://source.unsplash.com/random/400x400/?robot,cyberpunk,tech" alt="Ollo Avatar" class="rounded-full object-cover w-full h-full mix-blend-overlay opacity-80">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                             <i data-lucide="bot" class="w-32 h-32 text-white opacity-80"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4"><span class="text-gradient">About</span> Me</h2>
+                <div class="w-20 h-1 bg-neon-purple mx-auto rounded-full mb-6"></div>
+            </div>
+
+            <div class="glass-card p-8 md:p-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="grid md:grid-cols-3 gap-12 items-center">
+                    <div class="md:col-span-1 flex justify-center">
+                         <div class="relative w-48 h-48 rounded-2xl overflow-hidden rotate-3 hover:rotate-0 transition-all duration-500 border-2 border-neon-blue/30">
+                            <img src="https://source.unsplash.com/random/300x300/?programmer,setup" alt="About Ollo" class="object-cover w-full h-full">
+                         </div>
+                    </div>
+                    <div class="md:col-span-2 space-y-6 text-gray-300">
+                        <p class="text-lg">
+                            Hi there! I'm Ollo, based in the digital realm. My passion lies at the intersection of cutting-edge technology and creative storytelling. I don't just consume tech; I analyze it, break it down, and present it in ways that inspire and educate.
+                        </p>
+                        <p>
+                            My journey began with a curiosity about how things work under the hood. Today, I leverage that curiosity to create compelling content related to software development, gadgets, and emerging tech trends like AI and Web3.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 pt-4">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="zap" class="text-neon-blue"></i> Fast Learner
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="video" class="text-neon-purple"></i> Video Production
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="code-2" class="text-neon-blue"></i> Web Development
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="share-2" class="text-neon-purple"></i> Social Media Tech
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section-padding relative overflow-hidden">
+        <div class="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-neon-blue/10 rounded-full blur-[128px] -z-10"></div>
+        <div class="max-w-screen-xl mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                 <h2 class="text-3xl md:text-5xl font-bold mb-4">My <span class="text-gradient">Arsenal</span></h2>
+                <div class="w-20 h-1 bg-neon-blue mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-400 max-w-xl mx-auto">The tools and technologies I use to bring ideas to life.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-6 hover:border-neon-blue/50 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-3 bg-neon-blue/20 rounded-lg text-neon-blue">
+                            <i data-lucide="layout-dashboard" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Frontend Dev</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">HTML5/CSS3</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">JavaScript (ES6+)</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg text-neon-blue border-neon-blue/30">React.js</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg text-neon-blue border-neon-blue/30">Tailwind CSS</span>
+                    </div>
+                </div>
+                 <div class="glass-card p-6 hover:border-neon-purple/50 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-3 bg-neon-purple/20 rounded-lg text-neon-purple">
+                            <i data-lucide="camera" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Content Creation</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">Adobe Premiere</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">Photoshop</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">OBS Studio</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">CapCut</span>
+                    </div>
+                </div>
+                 <div class="glass-card p-6 hover:border-neon-blue/50 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-3 bg-neon-blue/20 rounded-lg text-neon-blue">
+                            <i data-lucide="terminal" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Tech & Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">Git & Github</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">VS Code</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">Figma</span>
+                        <span class="px-3 py-1 text-sm border border-glass-border rounded-full bg-glass-bg">ChatGPT/AI Tools</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="projects" class="section-padding">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                 <h2 class="text-3xl md:text-5xl font-bold mb-4">Featured <span class="text-gradient">Projects</span></h2>
+                <div class="w-20 h-1 bg-neon-purple mx-auto rounded-full mb-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card group overflow-hidden hover:shadow-[0_0_30px_rgba(189,0,255,0.2)] transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-48 overflow-hidden rounded-t-xl">
+                        <img src="https://source.unsplash.com/random/600x400/?cyberpunk,city" alt="Project 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-dark-bg/40 group-hover:bg-dark-bg/10 transition-all"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-neon-purple transition">Neon Genesis Blog</h3>
+                        <p class="text-gray-400 text-sm mb-4">A futuristic tech blog built with React and headless CMS. Features dark mode and smooth page transitions.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-neon-purple/10 text-neon-purple rounded-md">React</span>
+                            <span class="text-xs px-2 py-1 bg-neon-blue/10 text-neon-blue rounded-md">Tailwind</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1 text-sm text-white hover:text-neon-purple transition">
+                            View Project <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                 <div class="glass-card group overflow-hidden hover:shadow-[0_0_30px_rgba(0,243,255,0.2)] transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-48 overflow-hidden rounded-t-xl">
+                        <img src="https://source.unsplash.com/random/600x400/?tech,review" alt="Project 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-dark-bg/40 group-hover:bg-dark-bg/10 transition-all"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-neon-blue transition">Tech Review Channel</h3>
+                        <p class="text-gray-400 text-sm mb-4">YouTube channel focused on deep-dive reviews of the latest developer gadgets and software.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-red-500/10 text-red-400 rounded-md">YouTube</span>
+                            <span class="text-xs px-2 py-1 bg-neon-purple/10 text-neon-purple rounded-md">Premiere Pro</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1 text-sm text-white hover:text-neon-blue transition">
+                            Visit Channel <i data-lucide="youtube" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                 <div class="glass-card group overflow-hidden hover:shadow-[0_0_30px_rgba(189,0,255,0.2)] transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-48 overflow-hidden rounded-t-xl">
+                        <img src="https://source.unsplash.com/random/600x400/?ai,robot" alt="Project 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-dark-bg/40 group-hover:bg-dark-bg/10 transition-all"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-neon-purple transition">AI Image Generator UI</h3>
+                        <p class="text-gray-400 text-sm mb-4">A clean, glassmorphism UI concept for an AI-powered image generation tool.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-neon-purple/10 text-neon-purple rounded-md">Figma</span>
+                            <span class="text-xs px-2 py-1 bg-neon-blue/10 text-neon-blue rounded-md">UI/UX</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1 text-sm text-white hover:text-neon-purple transition">
+                            View Design <i data-lucide="figma" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="experience" class="section-padding relative">
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-purple/10 rounded-full blur-[128px] -z-10"></div>
+
+        <div class="max-w-screen-lg mx-auto px-4">
+             <div class="text-center mb-16" data-aos="fade-up">
+                 <h2 class="text-3xl md:text-5xl font-bold mb-4">My <span class="text-gradient">Journey</span></h2>
+                <div class="w-20 h-1 bg-neon-blue mx-auto rounded-full mb-6"></div>
+            </div>
+
+            <div class="relative">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-glass-border"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative">
+                    <div class="md:text-right md:pr-12 order-2 md:order-1" data-aos="fade-right">
+                        <h3 class="text-xl font-bold text-neon-blue">Lead Content Creator</h3>
+                        <p class="text-sm text-gray-400 mb-2">TechWave Media | 2022 - Present</p>
+                        <div class="glass-card p-4 inline-block text-left md:text-right">
+                            <p class="text-gray-300 text-sm">Producing high-quality video content covering the latest tech hardware and software ecosystems. Grew channel subscribers by 150%.</p>
+                        </div>
+                    </div>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center order-1 md:order-2">
+                        <div class="w-6 h-6 bg-dark-bg border-4 border-neon-blue rounded-full z-10 shadow-[0_0_15px_rgba(0,243,255,0.5)]"></div>
+                    </div>
+                     <div class="hidden md:block order-3"></div> </div>
+
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative">
+                    <div class="hidden md:block order-1"></div> <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center order-1">
+                         <div class="w-6 h-6 bg-dark-bg border-4 border-neon-purple rounded-full z-10 shadow-[0_0_15px_rgba(189,0,255,0.5)]"></div>
+                    </div>
+                    <div class="md:pl-12 order-2" data-aos="fade-left">
+                        <h3 class="text-xl font-bold text-neon-purple">Freelance Front-End Dev</h3>
+                        <p class="text-sm text-gray-400 mb-2">Self-Employed | 2020 - 2022</p>
+                         <div class="glass-card p-4 inline-block">
+                            <p class="text-gray-300 text-sm">Developed responsive websites for startups using React and Tailwind CSS. Focused on creating performant and visually unique interfaces.</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                    <div class="md:text-right md:pr-12 order-2 md:order-1" data-aos="fade-right">
+                        <h3 class="text-xl font-bold text-neon-blue">Junior Tech Editor</h3>
+                        <p class="text-sm text-gray-400 mb-2">GadgetZone Blog | 2018 - 2020</p>
+                        <div class="glass-card p-4 inline-block text-left md:text-right">
+                            <p class="text-gray-300 text-sm">Wrote daily articles on consumer electronics and managed social media accounts for the blog.</p>
+                        </div>
+                    </div>
+                     <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center order-1 md:order-2">
+                        <div class="w-6 h-6 bg-dark-bg border-4 border-neon-blue rounded-full z-10 shadow-[0_0_15px_rgba(0,243,255,0.5)]"></div>
+                    </div>
+                     <div class="hidden md:block order-3"></div> </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+         <div class="max-w-screen-xl mx-auto px-4">
+            <div class="glass-card p-8 md:p-16 overflow-hidden relative">
+                 <div class="absolute top-0 right-0 w-64 h-64 bg-neon-purple/20 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+                 <div class="absolute bottom-0 left-0 w-64 h-64 bg-neon-blue/20 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div data-aos="fade-right">
+                         <h2 class="text-3xl md:text-5xl font-bold mb-6">Let's <span class="text-gradient">Collaborate</span></h2>
+                        <p class="text-gray-300 mb-8 text-lg">
+                            Have a project in mind, a tech question, or just want to say hi? Drop me a message. I'm always open to discussing new ideas and opportunities.
+                        </p>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-4">
+                                <div class="p-3 bg-glass-bg border border-glass-border rounded-full text-neon-blue">
+                                     <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <span class="text-gray-300">hello@ollo.tech</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="p-3 bg-glass-bg border border-glass-border rounded-full text-neon-purple">
+                                     <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                </div>
+                                <span class="text-gray-300">Digital Nomad / Worldwide</span>
+                            </div>
+                        </div>
+
+                         <div class="flex gap-4">
+                            <a href="#" class="p-3 bg-glass-bg border border-glass-border rounded-full text-gray-400 hover:text-neon-blue hover:border-neon-blue transition duration-300">
+                                <i data-lucide="twitter" class="w-6 h-6"></i>
+                            </a>
+                             <a href="#" class="p-3 bg-glass-bg border border-glass-border rounded-full text-gray-400 hover:text-neon-purple hover:border-neon-purple transition duration-300">
+                                <i data-lucide="linkedin" class="w-6 h-6"></i>
+                            </a>
+                             <a href="#" class="p-3 bg-glass-bg border border-glass-border rounded-full text-gray-400 hover:text-neon-blue hover:border-neon-blue transition duration-300">
+                                <i data-lucide="github" class="w-6 h-6"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-left" data-aos-delay="200">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-300">Your Name</label>
+                                <input type="text" id="name" class="w-full p-4 bg-glass-bg border border-glass-border rounded-xl focus:ring-2 focus:ring-neon-blue focus:border-transparent outline-none text-white placeholder-gray-500 transition" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Your Email</label>
+                                <input type="email" id="email" class="w-full p-4 bg-glass-bg border border-glass-border rounded-xl focus:ring-2 focus:ring-neon-purple focus:border-transparent outline-none text-white placeholder-gray-500 transition" placeholder="john@example.com">
+                            </div>
+                            <div>
+                                <label for="message" class="block mb-2 text-sm font-medium text-gray-300">Your Message</label>
+                                <textarea id="message" rows="4" class="w-full p-4 bg-glass-bg border border-glass-border rounded-xl focus:ring-2 focus:ring-neon-blue focus:border-transparent outline-none text-white placeholder-gray-500 transition resize-none" placeholder="Hey Ollo, I have an idea..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 px-6 bg-gradient-to-r from-neon-blue to-neon-purple text-white font-bold rounded-xl hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(189,0,255,0.3)]">
+                                Send Message <i data-lucide="send" class="w-5 h-5 inline ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </section>
+
+    <footer class="py-8 text-center border-t border-glass-border bg-dark-bg/50 backdrop-blur-md">
+        <p class="text-gray-500 flex items-center justify-center gap-1">
+            Designed & Built by Ollo <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-current"></i> 2023
+        </p>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+          once: true, // Animation occurs only once on scroll
+          duration: 800, // Duration of animation in ms
+          easing: 'ease-in-out-quad',
+          offset: 100, // Offset from the bottom of the viewport
+      });
+    </script>
+
+</body>
+</html>
