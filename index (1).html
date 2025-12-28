@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Slot Machine Demo</title>
+    <style>
+        /* --- RESET & BODY --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            background-image: radial-gradient(circle, #2b2b2b 0%, #000000 100%);
+        }
+
+        /* --- SLOT MACHINE FRAME --- */
+        .slot-machine {
+            background: linear-gradient(135deg, #d4af37 0%, #f9e68c 50%, #d4af37 100%); /* Gold Metal */
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.5),
+                inset 0 0 10px rgba(0,0,0,0.5);
+            width: 400px;
+            text-align: center;
+            position: relative;
+            border: 5px solid #8a6e23;
+        }
+
+        .header {
+            background-color: #330000;
+            color: #ffcc00;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px #ff0000;
+            border: 2px solid #d4af37;
+        }
+
+        /* --- THE REELS (WINDOW) --- */
+        .window {
+            background-color: white;
+            border: 4px solid #333;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #000 0%, #333 10%, #fff 50%, #333 90%, #000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Line indicator */
+        .payline {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 0, 0, 0.5);
+            z-index: 10;
+            pointer-events: none;
+            box-shadow: 0 0 5px red;
+        }
+
+        .reel {
+            width: 80px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            /* Inset shadow creates 3D cylinder look */
+            box-shadow: inset 0 10px 15px rgba(0,0,0,0.4), inset 0 -10px 15px rgba(0,0,0,0.4);
+            border: 1px solid #999;
+            transition: transform 0.1s;
+        }
+
+        /* Animation Class for Spinning */
+        .blur {
+            filter: blur(4px);
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            animation: shake 0.1s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-5px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(5px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* --- CONTROLS --- */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .info-panel {
+            display: flex;
+            justify-content: space-between;
+            background-color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #555;
+            color: #0f0; /* Old digital clock green */
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        button#spin-btn {
+            background: linear-gradient(to bottom, #ff4d4d, #cc0000);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #990000, 0 10px 10px rgba(0,0,0,0.3);
+            transition: all 0.1s;
+            text-transform: uppercase;
+        }
+
+        button#spin-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #990000, 0 2px 2px rgba(0,0,0,0.3);
+        }
+
+        button#spin-btn:disabled {
+            background: #555;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .message {
+            height: 20px;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #000;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slot-machine">
+        <div class="header">
+            🀄 szyy_ 404 super gacor🀄
+        </div>
+
+        <div class="window">
+            <div class="payline"></div>
+            <div class="reel" id="reel1">🍒</div>
+            <div class="reel" id="reel2">🍒</div>
+            <div class="reel" id="reel3">🍒</div>
+        </div>
+
+        <div class="controls">
+            <div class="info-panel">
+                <span>KREDIT: <span id="credits">1.000.000</span></span>
+                <span>TARUHAN: <span id="bet">10.000</span></span>
+            </div>
+            
+            <div class="message" id="message">Semoga Beruntung!</div>
+
+            <button id="spin-btn" onclick="spin()">PUTAR</button>
+        </div>
+    </div>
+
+    <script>
+        // --- KONFIGURASI GAME ---
+        const symbols = ["🍒", "🍋", "🍇", "🍉", "🔔", "💎", "7️⃣"];
+        // Bobot probabilitas (biar tidak terlalu sering menang, lebih realistis)
+        // 7️⃣ dan 💎 lebih jarang muncul
+        const symbolWeights = [
+            "🍒", "🍒", "🍒", "🍒", "🍒",
+            "🍋", "🍋", "🍋", "🍋",
+            "🍇", "🍇", "🍇", 
+            "🍉", "🍉", "🍉", 
+            "🔔", "🔔", 
+            "💎", "💎",
+            "7️⃣"
+        ];
+
+        let credits = 1000;
+        const betCost = 10;
+        let isSpinning = false;
+
+        // Elemen DOM
+        const reel1 = document.getElementById('reel1');
+        const reel2 = document.getElementById('reel2');
+        const reel3 = document.getElementById('reel3');
+        const creditsDisplay = document.getElementById('credits');
+        const msgDisplay = document.getElementById('message');
+        const spinBtn = document.getElementById('spin-btn');
+
+        // Fungsi mendapatkan simbol acak berdasarkan bobot
+        function getRandomSymbol() {
+            const randomIndex = Math.floor(Math.random() * symbolWeights.length);
+            return symbolWeights[randomIndex];
+        }
+
+        // Fungsi Utama Spin
+        function spin() {
+            if (isSpinning) return;
+            if (credits < betCost) {
+                msgDisplay.innerText = "Kredit Habis! Refresh untuk ulang.";
+                msgDisplay.style.color = "red";
+                return;
+            }
+
+            // 1. Kurangi Kredit
+            credits -= betCost;
+            updateUI();
+            isSpinning = true;
+            spinBtn.disabled = true;
+            msgDisplay.innerText = "Memutar...";
+            msgDisplay.style.color = "white";
+
+            // 2. Animasi Blur (Mulai Putaran)
+            reel1.classList.add('blur');
+            reel2.classList.add('blur');
+            reel3.classList.add('blur');
+
+            // Simulasi putaran cepat dengan mengganti teks secara random selama blur
+            const shuffleInterval = setInterval(() => {
+                reel1.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                reel2.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                reel3.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+            }, 50);
+
+            // 3. Menentukan Hasil Akhir (Pre-calculation)
+            const res1 = getRandomSymbol();
+            const res2 = getRandomSymbol();
+            const res3 = getRandomSymbol();
+
+            // 4. Menghentikan Reel satu per satu (Efek Realistis)
+            
+            // Stop Reel 1 (pada 1 detik)
+            setTimeout(() => {
+                reel1.classList.remove('blur');
+                reel1.innerText = res1;
+            }, 1000);
+
+            // Stop Reel 2 (pada 1.5 detik)
+            setTimeout(() => {
+                reel2.classList.remove('blur');
+                reel2.innerText = res2;
+            }, 1500);
+
+            // Stop Reel 3 (pada 2 detik) & Cek Kemenangan
+            setTimeout(() => {
+                clearInterval(shuffleInterval); // Hentikan efek acak background
+                reel3.classList.remove('blur');
+                reel3.innerText = res3;
+                
+                checkWin(res1, res2, res3);
+                
+                isSpinning = false;
+                spinBtn.disabled = false;
+            }, 2000);
+        }
+
+        function checkWin(s1, s2, s3) {
+            // Logika Kemenangan
+            if (s1 === s2 && s2 === s3) {
+                // JACKPOT (3 Simbol Sama)
+                let prize = 0;
+                if (s1 === "7️⃣") prize = 500;
+                else if (s1 === "💎") prize = 200;
+                else if (s1 === "🔔") prize = 100;
+                else prize = 50;
+
+                credits += prize;
+                msgDisplay.innerText = `JACKPOT!! Menang ${prize}!`;
+                msgDisplay.style.color = "#0f0";
+                playSound("win");
+            } else if (s1 === s2 || s2 === s3 || s1 === s3) {
+                // Menang Kecil (2 Simbol Sama - Opsional)
+                const prize = 5; 
+                // credits += prize; // Aktifkan jika ingin hadiah hiburan
+                // msgDisplay.innerText = `Lumayan! Dapat ${prize}`;
+                msgDisplay.innerText = "Hampir kena!";
+                msgDisplay.style.color = "yellow";
+            } else {
+                msgDisplay.innerText = "Coba Lagi!";
+                msgDisplay.style.color = "#ccc";
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            creditsDisplay.innerText = credits;
+        }
+
+        function playSound(type) {
+            // Placeholder untuk efek suara (Browser memblokir autoplay, jadi ini opsional)
+            // Anda bisa menambahkan file audio di sini jika mau.
+            console.log("Sound effect: " + type);
+        }
+    </script>
+</body>
+</html>
